@@ -36,7 +36,7 @@ class ProductInController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -77,7 +77,6 @@ class ProductInController extends Controller
 
         // $products = Product::all();
 
-        // return view('pages.product-in.edit', compact('product_in', 'products'));
     }
 
     /**
@@ -116,11 +115,19 @@ class ProductInController extends Controller
         return redirect()->back();
     }
 
-    public function cetak_pdf()
+    public function exportProductInAll()
     {
         $product_ins = ProductIn::with(['product.supplier'])->get();
 
         $pdf = PDF::loadview('pages.product-in.product_in_pdf',['product_ins'=>$product_ins])->setOptions(['defaultFont' => 'sans-serif']);
     	return $pdf->download('laporan-produk-masuk-pdf');
+    }
+
+    public function exportInvoice($id)
+    {
+        $product_in = ProductIn::with(['product.supplier'])->findOrFail($id);
+
+        $pdf = PDF::loadview('pages.product-in.invoice_pdf', ['product_in'=>$product_in])->setOptions(['defaultFont' => 'sans-serif']);
+        return $pdf->download($product_in->id.'invoice_product_in');
     }
 }

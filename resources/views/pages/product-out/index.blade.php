@@ -16,6 +16,7 @@
                         <div class="card-body">
                             <a href="{{ route('product-out.create') }}" class="btn btn-primary mb-3"> + Tambah Produk Keluar
                                 Baru</a>
+                                <a href="{{route('product-out.cetakpdf')}}" class="btn btn-danger mb-3">Cetak PDF</a>
                             <div>
                                 <table
                                     class="table table-hover scroll-horizontal-vertical w-100 table-bordered table-striped"
@@ -23,7 +24,7 @@
                                     <thead>
                                         <tr>
                                             <th>Produk</th>
-                                            <th>Supplier</th>
+                                            <th>Customer</th>
                                             <th>Jumlah</th>
                                             <th>Tanggal Pembelian</th>
                                             <th>Action</th>
@@ -33,7 +34,7 @@
                                         @forelse ($product_outs as $product_out)
                                             <tr>
                                                 <td>{{ $product_out->product->name }}</td>
-                                                <td>{{ $product_out->product->supplier->name }}</td>
+                                                <td>{{ $product_out->customer->name}}</td>
                                                 <td>{{ $product_out->quantity }}</td>
                                                 <td>{{$product_out->date}}</td>
                                                 <td>
@@ -61,6 +62,59 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="7" class="text-center">Tidak Ada Product</td>
+                                            </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{{-- Invoice --}}
+<div class="section-content section-dashboard-home" data-aos="fade-up">
+    <div class="container-fluid">
+        <div class="dashboard-heading">
+            <h2 class="dashboard-title">Export Invoice</h2>
+        </div>
+        <div class="dashboard-content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div>
+                                <table
+                                    class="table table-hover scroll-horizontal-vertical w-100 table-bordered table-striped"
+                                    id="table1">
+                                    <thead>
+                                        <tr>
+                                            <th>Produk</th>
+                                            <th>Customer</th>
+                                            <th>Jumlah</th>
+                                            <th>Tanggal</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse ($product_outs as $product_out)
+                                            <tr>
+                                                <td>{{ $product_out->product->name }}</td>
+                                                <td>{{ $product_out->customer->name }}</td>
+                                                <td>{{ $product_out->quantity }}</td>
+                                                <td>{{$product_out->date}}</td>
+                                                <td>
+                                                    <a href="{{ route('product-out.exportInvoice', [ 'id' => $product_out->id ]) }}" class="btn btn-sm btn-danger">Export PDF</a>
+
                                                 </td>
                                             </tr>
                                         @empty

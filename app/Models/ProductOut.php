@@ -19,5 +19,10 @@ class ProductOut extends Model
     {
         return $this->belongsTo(Product::class, 'products_id', 'id');
     }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'customers_id', 'id');
+    }
     
 }

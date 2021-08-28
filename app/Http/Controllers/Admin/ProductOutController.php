@@ -8,6 +8,7 @@ use App\Models\ProductOut;
 use App\Models\Product;
 use App\Http\Requests\ProductOutRequest;
 use Illuminate\Http\Request;
+use PDF;
 
 class ProductOutController extends Controller
 {
@@ -98,5 +99,21 @@ class ProductOutController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function cetak_pdf()
+    {
+        $product_outs = ProductOut::with(['product', 'customer'])->get();
+
+        $pdf = PDF::loadview('pages.product-out.product_out_pdf',['product_outs'=>$product_outs])->setOptions(['defaultFont' => 'sans-serif']);
+    	return $pdf->download('laporan-produk-masuk-pdf');
+    }
+
+    public function exportInvoice($id)
+    {
+        $product_out = ProductOut::with(['product', 'customer'])->findOrFail($id);
+
+        $pdf = PDF::loadview('pages.product-out.invoice_pdf',['product_out'=>$product_out])->setOptions(['defaultFont' => 'sans-serif']);
+        return $pdf->download($product_out->id.'invoice_product_out');
     }
 }

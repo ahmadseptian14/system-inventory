@@ -62,17 +62,16 @@ Route::middleware('auth')->group(function() {
      Route::get('/product-in', [ProductInController::class, 'index'])->name('product-in.index');
      Route::get('/product-in-create', [ProductInController::class, 'create'])->name('product-in.create');
      Route::post('/product-in-create', [ProductInController::class, 'store'])->name('product-in.store');
-     Route::get('/product-in-cetak_pdf', [ProductInController::class, 'cetak_pdf'])->name('product-in.cetakpdf');
-    //  Route::get('/product-in-edit/{id}', [ProductInController::class, 'edit'])->name('product-in.edit');
-    //  Route::put('/product-in-create/{id}', [ProductInController::class, 'update'])->name('product-in.update');
+     Route::get('/product-in-cetak_pdf', [ProductInController::class, 'exportProductInAll'])->name('product-in.exportAll');
+     Route::get('/product-in-invoice_pdf/{id}', [ProductInController::class, 'exportInvoice'])->name('product-in.exportInvoice');
      Route::delete('/product-in/{id}', [ProductInController::class, 'destroy'])->name('product-in.destroy');
  
      // Product Out
      Route::get('/product-out', [ProductOutController::class, 'index'])->name('product-out.index');
      Route::get('/product-out-create', [ProductOutController::class, 'create'])->name('product-out.create');
      Route::post('/product-out-create', [ProductOutController::class, 'store'])->name('product-out.store');
-     Route::get('/product-out-edit/{id}', [ProductOutController::class, 'edit'])->name('product-out.edit');
-     Route::put('/product-out-create/{id}', [ProductOutController::class, 'update'])->name('product-out.update');
+     Route::get('/product-out-cetak_pdf', [ProductOutController::class, 'cetak_pdf'])->name('product-out.cetakpdf');
+     Route::get('/product-out-invoice_pdf/{id}', [ProductOutController::class, 'exportInvoice'])->name('product-out.exportInvoice');
      Route::delete('/product-out/{id}', [ProductOutController::class, 'destroy'])->name('product-out.destroy');
     
 });

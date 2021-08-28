@@ -4,6 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\Supplier;
+use App\Models\Customer;
+use App\Models\ProductIn;
+use App\Models\ProductOut;
 
 class DashboardController extends Controller
 {
@@ -13,8 +19,14 @@ class DashboardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('pages.dashboard');
+    {   
+        $categories = Category::count();
+        $suppliers = Supplier::count();
+        $products = Product::count();
+        $customers = Customer::count();
+        $productIns = ProductIn::count();
+        $productOuts = ProductOut::count();
+        return view('pages.dashboard', compact('categories','products','suppliers','customers','productIns','productOuts'));
     }
 
     /**

@@ -25,6 +25,7 @@
                                                 <th>Nama</th>
                                                 <th>Alamat</th>
                                                 <th>Nomor Telepon</th>
+                                                <th>Email</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -34,6 +35,7 @@
                                                     <td>{{ $supplier->name }}</td>
                                                     <td>{{ $supplier->address }}</td>
                                                     <td>{{ $supplier->phone }}</td>
+                                                    <td>{{ $supplier->email }}</td>
                                                     <td>
                                                         <div class="btn-group">
                                                             <div class="dropdown">
